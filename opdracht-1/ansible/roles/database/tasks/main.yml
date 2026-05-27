@@ -1,0 +1,33 @@
+- name: Installeer MySQL server
+  ansible.builtin.apt:
+    name: "{{ mysql_package }}"
+    state: present
+  notify: Restart mysql
+
+- name: Installeer PyMySQL voor Ansible MySQL modules
+  ansible.builtin.apt:
+    name: "{{ mysql_python_package }}"
+    state: present
+
+- name: Zorg dat MySQL gestart en enabled is
+  ansible.builtin.service:
+    name: "{{ mysql_service_name }}"
+    state: started
+    enabled: true
+
+- name: Configureer MySQL bind-address
+  ansible.builtin.lineinfile:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: '^bind-address\s*='
+    line: "bind-address = {{ mysql_bind_address }}"
+  notify: Restart mysql
+
+- name: Maak MySQL gebruiker dbuser aan
+  community.mysql.mysql_user:
+    name: "{{ mysql_user_name }}"
+    password: "{{ mysql_user_password }}"
+    host: "{{ mysql_user_host }}"
+    priv: "*.*:ALL"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  notify: Restart mysql

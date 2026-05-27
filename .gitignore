@@ -1,0 +1,12 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+terraform.tfvars
+inventory.ini
+*.retry
+.DS_Store
+ansible/group_vars/all/vault.yml
+.ansible_vault_pass
+.vault_pass
+*vault_pass*

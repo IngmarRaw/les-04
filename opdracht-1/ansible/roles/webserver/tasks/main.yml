@@ -1,0 +1,29 @@
+- name: Installeer Apache
+  ansible.builtin.apt:
+    name: "{{ apache_package }}"
+    state: present
+  notify: Restart apache
+
+- name: Installeer PHP en php-mysql
+  ansible.builtin.apt:
+    name: "{{ php_packages }}"
+    state: present
+  notify: Restart apache
+
+- name: Plaats PHP testpagina
+  ansible.builtin.copy:
+    dest: "{{ web_document_root }}/{{ web_index_file }}"
+    owner: www-data
+    group: www-data
+    mode: '0644'
+    content: |
+      <?php
+      echo "Webserver werkt met Apache, PHP en php-mysql.";
+      ?>
+  notify: Restart apache
+
+- name: Zorg dat Apache gestart en enabled is
+  ansible.builtin.service:
+    name: "{{ web_service_name }}"
+    state: started
+    enabled: true

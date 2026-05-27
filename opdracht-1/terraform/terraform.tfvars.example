@@ -1,0 +1,11 @@
+esxi_password = "[redacted]"
+
+disk_store      = "datastore1"
+virtual_network = "VM Network"
+
+ssh_public_key_path  = "~/.ssh/id_ed25519.pub"
+ssh_private_key_path = "~/.ssh/id_ed25519"
+
+vm_username         = "iacuser"
+webserver_name      = "les04-webserver"
+databaseserver_name = "les04-database"

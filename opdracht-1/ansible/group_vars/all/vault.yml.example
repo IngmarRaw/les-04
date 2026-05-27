@@ -1,0 +1,3 @@
+mysql_user_name: dbuser
+mysql_user_password: dbpassword
+mysql_user_host: "%"

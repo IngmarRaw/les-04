@@ -1,0 +1,9 @@
+apache_package: apache2
+
+php_packages:
+  - php
+  - php-mysql
+
+web_service_name: apache2
+web_document_root: /var/www/html
+web_index_file: index.php
