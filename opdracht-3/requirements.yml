@@ -1,0 +1,7 @@
+---
+roles:
+  - name: DirectLogic.webserver
+  - name: DirectLogic.database
+
+collections:
+  - name: community.mysql

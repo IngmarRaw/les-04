@@ -1,0 +1,14 @@
+---
+- name: Configureer webserver met Galaxy role van collega
+  hosts: webservers
+  become: true
+
+  roles:
+    - DirectLogic.webserver
+
+- name: Configureer databaseserver met Galaxy role van collega
+  hosts: databaseservers
+  become: true
+
+  roles:
+    - DirectLogic.database
