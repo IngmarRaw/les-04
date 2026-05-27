@@ -86,16 +86,18 @@ resource "local_file" "ansible_inventory" {
 
   content = <<-EOT
 [webservers]
-${esxi_guest.webserver.guest_name} ansible_host=${esxi_guest.webserver.ip_address} ansible_user=${var.vm_username} ansible_ssh_private_key_file=${pathexpand(var.ssh_private_key_path)}
+${esxi_guest.webserver.guest_name} ansible_host=${esxi_guest.webserver.ip_address}
 
 [databaseservers]
-${esxi_guest.databaseserver.guest_name} ansible_host=${esxi_guest.databaseserver.ip_address} ansible_user=${var.vm_username} ansible_ssh_private_key_file=${pathexpand(var.ssh_private_key_path)}
+${esxi_guest.databaseserver.guest_name} ansible_host=${esxi_guest.databaseserver.ip_address}
 
 [esxi:children]
 webservers
 databaseservers
 
 [all:vars]
+ansible_user=${var.vm_username}
+ansible_ssh_private_key_file=${var.ssh_private_key_path}
 ansible_python_interpreter=/usr/bin/python3
 EOT
 }
