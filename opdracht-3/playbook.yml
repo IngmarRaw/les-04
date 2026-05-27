@@ -3,12 +3,48 @@
   hosts: webservers
   become: true
 
+  pre_tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
   roles:
-    - DirectLogic.webserver
+    - role: DirectLogic.webserver
+
+  post_tasks:
+    - name: Controleer of Apache actief is
+      ansible.builtin.service_facts:
+
+    - name: Toon Apache status
+      ansible.builtin.debug:
+        msg: "Apache service is aanwezig op {{ inventory_hostname }}"
+      when: "'apache2.service' in ansible_facts.services"
 
 - name: Configureer databaseserver met Galaxy role van collega
   hosts: databaseservers
   become: true
 
+  pre_tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+  vars:
+    mysql_user_name: dbuser
+    mysql_user_password: dbpassword
+    mysql_user_host: "%"
+    mysql_user_privileges: "*.*:ALL"
+
   roles:
-    - DirectLogic.database
+    - role: DirectLogic.database
+
+  post_tasks:
+    - name: Controleer of MySQL actief is
+      ansible.builtin.service_facts:
+
+    - name: Toon MySQL status
+      ansible.builtin.debug:
+        msg: "MySQL service is aanwezig op {{ inventory_hostname }}"
+      when: "'mysql.service' in ansible_facts.services"
