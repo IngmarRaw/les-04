@@ -30,4 +30,5 @@
     priv: "*.*:ALL"
     state: present
     login_unix_socket: /var/run/mysqld/mysqld.sock
+    column_case_sensitive: true
   notify: Restart mysql
