@@ -1,0 +1,20 @@
+---
+- name: Configureer webserver met Galaxy role
+  hosts: webservers
+  become: true
+
+  roles:
+    - webserver
+
+- name: Configureer database met Galaxy role
+  hosts: databaseservers
+  become: true
+
+  vars:
+    database_mysql_user_name: dbuser
+    database_mysql_user_password: dbpassword
+    database_mysql_user_host: "%"
+    database_mysql_user_privileges: "*.*:ALL"
+
+  roles:
+    - database

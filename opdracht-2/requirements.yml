@@ -1,0 +1,12 @@
+---
+roles:
+  - name: webserver
+    src: https://github.com/IngmarRaw/ansible-role-webserver.git
+    scm: git
+
+  - name: database
+    src: https://github.com/IngmarRaw/ansible-role-database.git
+    scm: git
+
+collections:
+  - name: community.mysql
