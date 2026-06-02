@@ -31,12 +31,6 @@
         update_cache: true
         cache_valid_time: 3600
 
-  vars:
-    mysql_user_name: dbuser
-    mysql_user_password: dbpassword
-    mysql_user_host: "%"
-    mysql_user_privileges: "*.*:ALL"
-
   roles:
     - role: DirectLogic.database
 
