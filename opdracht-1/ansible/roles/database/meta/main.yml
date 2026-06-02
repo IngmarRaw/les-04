@@ -1,6 +1,7 @@
+---
 galaxy_info:
   author: Ingmar Renses
-  description: Installeert en configureert Apache, PHP en php-mysql op Ubuntu webservers.
+  description: Installeert en configureert MySQL op Ubuntu databaseservers.
   company: Windesheim
   license: MIT
   min_ansible_version: "2.14"
@@ -11,9 +12,8 @@ galaxy_info:
         - noble
 
   galaxy_tags:
-    - apache
-    - php
-    - webserver
+    - mysql
+    - database
     - ubuntu
 
 dependencies: []

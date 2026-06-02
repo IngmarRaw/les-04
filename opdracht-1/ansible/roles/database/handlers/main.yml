@@ -1,3 +1,4 @@
+---
 - name: Restart mysql
   ansible.builtin.service:
     name: "{{ mysql_service_name }}"

@@ -1,3 +1,6 @@
+---
 mysql_user_name: dbuser
 mysql_user_password: dbpassword
 mysql_user_host: "%"
+mysql_user_privileges: "les04db.*:ALL"
+mysql_database_name: les04db

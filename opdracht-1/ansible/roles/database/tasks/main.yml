@@ -1,3 +1,4 @@
+---
 - name: Installeer MySQL server
   ansible.builtin.apt:
     name: "{{ mysql_package }}"
@@ -22,13 +23,22 @@
     line: "bind-address = {{ mysql_bind_address }}"
   notify: Restart mysql
 
-- name: Maak MySQL gebruiker dbuser aan
+- name: Flush handlers zodat MySQL herstart is voor database/user configuratie
+  ansible.builtin.meta: flush_handlers
+
+- name: Maak applicatiedatabase aan
+  community.mysql.mysql_db:
+    name: "{{ mysql_database_name }}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Maak MySQL gebruiker aan voor webserver
   community.mysql.mysql_user:
     name: "{{ mysql_user_name }}"
     password: "{{ mysql_user_password }}"
     host: "{{ mysql_user_host }}"
-    priv: "*.*:ALL"
+    priv: "{{ mysql_user_privileges }}"
     state: present
     login_unix_socket: /var/run/mysqld/mysqld.sock
-    column_case_sensitive: true
+  no_log: true
   notify: Restart mysql

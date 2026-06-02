@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Ingmar Renses
   description: Installeert en configureert Apache, PHP en php-mysql op Ubuntu webservers.

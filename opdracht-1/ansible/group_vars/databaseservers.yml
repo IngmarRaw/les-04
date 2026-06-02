@@ -1,4 +1,8 @@
+---
 mysql_package: mysql-server
 mysql_service_name: mysql
 mysql_python_package: python3-pymysql
 mysql_bind_address: "0.0.0.0"
+mysql_database_name: les04db
+mysql_user_privileges: "{{ mysql_database_name }}.*:ALL"
+mysql_user_host: "{{ hostvars[groups['webservers'][0]].ansible_host }}"

@@ -1,3 +1,4 @@
+---
 - name: Voorbereiding voor alle servers
   hosts: all
   become: true
@@ -18,11 +19,6 @@
 - name: Configureer databaseserver
   hosts: databaseservers
   become: true
-
-  vars:
-    mysql_user_name: dbuser
-    mysql_user_password: dbpassword
-    mysql_user_host: "%"
 
   roles:
     - database
